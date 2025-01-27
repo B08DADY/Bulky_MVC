@@ -5,7 +5,7 @@ using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 
-namespace BulkyWeb.Controllers
+namespace BulkyWeb.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
@@ -46,7 +46,7 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-            Category EditedObj = _uow.Category.Get(u=>u.Id==Id);
+            Category EditedObj = _uow.Category.Get(u => u.Id == Id);
             if (EditedObj == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace BulkyWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(Category obj)
         {
-        //    Category? obj= _db.Categories.Find(id);
+            //    Category? obj= _db.Categories.Find(id);
             if (obj != null)
             {
                 _uow.Category.Remove(obj);
@@ -99,7 +99,7 @@ namespace BulkyWeb.Controllers
             }
 
             return NotFound();
-        
+
 
         }
     }
