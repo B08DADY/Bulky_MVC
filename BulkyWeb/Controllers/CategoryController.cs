@@ -1,4 +1,6 @@
 ﻿using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository;
+using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
@@ -7,15 +9,15 @@ namespace BulkyWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApllicationDbContext _db;
-        public CategoryController(ApllicationDbContext db)
+        private readonly IUnitOfWork _uow;
+        public CategoryController(IUnitOfWork uow)
         {
-            _db = db;
+            _uow = uow;
 
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _db.Categories.ToList();
+            List<Category> objCategoryList = _uow.Category.GetAll().ToList();
             return View(objCategoryList);
         }
         public IActionResult Create()
@@ -29,8 +31,8 @@ namespace BulkyWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _uow.Category.Add(obj);
+                _uow.Save();
                 TempData["success"] = "Your Category Added Successfully";
 
                 return RedirectToAction("Index");
@@ -44,7 +46,7 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-            Category EditedObj = _db.Categories.Find(Id);
+            Category EditedObj = _uow.Category.Get(u=>u.Id==Id);
             if (EditedObj == null)
             {
                 return NotFound();
@@ -59,8 +61,8 @@ namespace BulkyWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _uow.Category.Update(obj);
+                _uow.Save();
                 TempData["success"] = "Your Category Updated Successfully";
                 return RedirectToAction("Index");
             }
@@ -73,7 +75,7 @@ namespace BulkyWeb.Controllers
 
             if (id != null)
             {
-                Category? obj = _db.Categories.Find(id);
+                Category? obj = _uow.Category.Get(u => u.Id == id);
                 if (id != null)
                 {
                     return View(obj);
@@ -89,8 +91,8 @@ namespace BulkyWeb.Controllers
         //    Category? obj= _db.Categories.Find(id);
             if (obj != null)
             {
-                _db.Categories.Remove(obj);
-                _db.SaveChanges();
+                _uow.Category.Remove(obj);
+                _uow.Save();
                 TempData["success"] = "Your Category Removed Successfully";
 
                 return RedirectToAction("Index");

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BulkyWebRazor_Temp.Migrations
 {
-    [DbContext(typeof(BulkyRazorDbContext))]
+    [DbContext(typeof())]
     [Migration("20241229140439_test")]
     partial class test
     {

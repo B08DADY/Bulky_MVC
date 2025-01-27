@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<BulkyRazorDbContext>(options =>
+builder.Services.AddDbContext<>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DafaultConnection")));
 var app = builder.Build();
 
