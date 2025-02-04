@@ -10,6 +10,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategory, CategoryRepository>();
+builder.Services.AddScoped<IProduct, ProductRepository>();
+
 builder.Services.AddDbContext<ApllicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DafaultConnection")));
 
