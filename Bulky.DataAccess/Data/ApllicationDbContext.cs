@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bulky.DataAccess.Data
 {
-    public class ApllicationDbContext:DbContext
+    public class ApllicationDbContext : DbContext
     {
         internal object entities;
 
         public ApllicationDbContext(DbContextOptions<ApllicationDbContext> options)
-            :base(options)
+            : base(options)
         {
 
         }
