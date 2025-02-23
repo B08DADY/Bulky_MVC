@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulky.DataAccess.Repository.IRepository
+namespace Bulky.DataAccess.Repository.IRepo
 {
     public interface IProduct:IRepository<Product>
     {
-        void Update (Product product);
+        public void Update(Product p);
     }
 }

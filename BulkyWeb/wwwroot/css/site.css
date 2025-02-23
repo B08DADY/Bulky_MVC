@@ -20,3 +20,112 @@ html {
 body {
   margin-bottom: 60px;
 }
+<style >
+.page-header {
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    border-bottom: 3px solid #0d6efd;
+}
+
+.form-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    padding: 2rem;
+}
+
+.input-group-custom {
+    margin-bottom: 1.5rem;
+}
+
+    .input-group-custom label {
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 0.5rem;
+    }
+
+    .input-group-custom input {
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        padding: 0.75rem 1rem;
+        transition: border-color 0.2s ease-in-out;
+    }
+
+        .input-group-custom input:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.15);
+        }
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+.table-custom {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+    .table-custom thead {
+        background: linear-gradient(to right, #0d6efd, #0b5ed7);
+        color: white;
+    }
+
+    .table-custom th {
+        font-weight: 500;
+        padding: 1rem;
+    }
+
+    .table-custom td {
+        padding: 1rem;
+        vertical-align: middle;
+    }
+
+.validation-error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.action-buttons .btn {
+    margin: 0 0.25rem;
+}
+
+/* Updated Index View Styles */
+.index-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.index-title {
+    font-size: 2rem;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* Form Specific Styles */
+.form-header {
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+.form-title {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.delete-warning {
+    background-color: #fff5f5;
+    border-left: 4px solid #dc3545;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+</style >

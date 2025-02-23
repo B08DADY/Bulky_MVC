@@ -1,7 +1,10 @@
 using Bulky.DataAccess.Data;
 using Bulky.DataAccess.Repository;
-using Bulky.DataAccess.Repository.IRepository;
+using Bulky.DataAccess.Repository.IRepo;
+using Bulky.DataAccess.Repository.IRepo;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,12 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<ICategory, CategoryRepository>();
+builder.Services.AddScoped<ICategory, Categoryrepository>();
 builder.Services.AddScoped<IProduct, ProductRepository>();
 
 builder.Services.AddDbContext<ApllicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DafaultConnection")));
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApllicationDbContext>().AddDefaultTokenProviders();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,10 +35,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{ip?}"
-    );
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

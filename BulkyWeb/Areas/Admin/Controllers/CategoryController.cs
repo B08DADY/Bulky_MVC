@@ -1,6 +1,7 @@
 ﻿using Bulky.DataAccess.Data;
 using Bulky.DataAccess.Repository;
-using Bulky.DataAccess.Repository.IRepository;
+using Bulky.DataAccess.Repository.IRepo;
+using Bulky.DataAccess.Repository.IRepo;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
@@ -17,6 +18,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
+            
             List<Category> objCategoryList = _uow.Category.GetAll().ToList();
             return View(objCategoryList);
         }
@@ -40,6 +42,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return View();
 
         }
+        [HttpGet]
         public IActionResult Edit(int? Id)
         {
             if (Id == null || Id == 0)

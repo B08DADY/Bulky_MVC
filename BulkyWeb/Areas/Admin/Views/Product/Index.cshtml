@@ -1,0 +1,37 @@
+﻿@model List<Product>
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="container">
+            <div class="index-header">
+                <h1 class="index-title">
+                    <i class="bi bi-list-task me-2"></i>Products
+                </h1>
+                <a asp-controller="Product" asp-action="UpSert" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-2"></i>Add New Product
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="table-custom">
+            <table id="tblData" class="table table-hover mb-0" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Isbn</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}

@@ -1,54 +1,73 @@
-﻿using Bulky.DataAccess.Repository.IRepository;
+﻿using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository.IRepo;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Bulky.DataAccess.Data;
-using Microsoft.EntityFrameworkCore;
+
 namespace Bulky.DataAccess.Repository
 {
-    public class Repository<T> : IRepository<T>  where T : class  
+    public class Repository<T> :IRepository<T> where T : class
     {
-                 
         private readonly ApllicationDbContext _db;
-
-        internal DbSet<T> entities ;
+        internal DbSet<T> entities;
         public Repository(ApllicationDbContext db)
         {
             _db = db;
-            entities = _db.Set<T>();
+            entities = db.Set<T>();
+            _db.Products.Include(u => u.Category);
         }
-        public void Add(T entity)
+        public void Add(T cat)
         {
-
-            entities.Add(entity);
-        }
-
-        public T Get(Expression<Func<T, bool>> filter)
-        {
-            IQueryable<T> _entitis = entities;
-            _entitis = _entitis.Where(filter);
-            return _entitis.FirstOrDefault();
+            entities.Add(cat);
             
         }
 
-        public IEnumerable<T> GetAll()
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
-           IEnumerable<T> _entitis = entities;
-            return _entitis;
+            IQueryable<T> _entities = entities;
+            _entities = _entities.Where(filter);
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    _entities = _entities.Include(includeProp);
 
+                }
+
+            }
+            return _entities.FirstOrDefault();
+
+            
         }
 
-        public void Remove(T entity)
+        public IEnumerable<T> GetAll(string? includeProperties=null)
         {
-            entities.Remove(entity);
+            IQueryable<T> _entities = entities;
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach(var includeProp in includeProperties.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    _entities=_entities.Include(includeProp);
+
+                }
+
+            }
+
+            return _entities;
         }
 
-        public void RemoveRange(IEnumerable<T> entity)
+        public void Remove(T cat)
         {
-            entities.RemoveRange(entity);
+            entities.Remove(cat);
+        }
+
+        public void RemoveRange(IEnumerable<T> cats)
+        {
+            entities.RemoveRange(cats);
         }
     }
 }
